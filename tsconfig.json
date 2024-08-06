@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "jsxImportSource": "@emotion/react",
+    "noImplicitThis": false,
+    "incremental": true,
+    "typeRoots": ["node_modules/@types"],
+    "paths": {
+      "~cms/*": ["./src/cms/*"],
+      "~components/*": ["./src/components/*"],
+      "~constants/*": ["./src/constants/*"],
+      "~contexts/*": ["./src/contexts/*"],
+      "~entities/*": ["./src/entities/*"],
+      "~pages/*": ["./src/pages/*"],
+      "~services/*": ["./src/services/*"],
+      "~styles/*": ["./src/styles/*"],
+      "~utils/*": ["./src/utils/*"]
+    },
+    "checkJs": false
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/**/*", "server.js"],
+  "exclude": ["node_modules", "tw-classes", "out"],
+  "types": ["@emotion/react/types/css-prop", "node"]
+  
+}

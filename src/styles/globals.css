@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Highest level wailwind styling */
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  /* overflow: hidden; */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Signout button stylinig */
+
+.SignOutButton {
+  display: flex;
+  background-color: #a5dd23;
+  /* Green */
+  border: none;
+  color: white;
+  padding: 1px 3px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  transition: all 0.15s;
+}
+
+/* Tab menu - tabs styling*/
+
+.react-tabs {
+  display: flex;
+  margin-left: 0px;
+  width: 100%;
+  /* height: 95vh; */
+  border: 3px solid #175e97;
+  color: rgb(155, 221, 218);
+  background: #1c1d1f;
+}
+
+.react-tabs__tab-list {
+  display: flex;
+  flex-direction: column;
+  width: 215px;
+  margin: 0;
+  padding: 0;
+  color: white;
+  background: #3c4341;
+}
+
+.react-tabs__tab {
+  height: 40px;
+  width: 215px;
+  list-style: none;
+  padding: 12px 6px;
+  cursor: pointer;
+  color: #bbb;
+  border-bottom-color: rgb(255, 0, 0);
+}
+
+.react-tabs__tab--selected {
+  background: #1c1d1f;
+  border-color: #1c1d1f;
+  border-left: 4px solid #6eb800;
+  color: white;
+}
+
+.react-tabs__tab-panel {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+
+.react-tabs__tab-panel--selected {
+  width: 100%;
+}
+
+.react-tabs__tab {
+  padding-left: 24px;
+}
+
+.react-tabs__tab--selected {
+  padding-left: 21px;
+}
+
+.panel-content {
+  text-align: center;
+  width: 1000px;
+}
+
+/* Tab menu item styling */
+.MenuIcon {
+  padding-left: 10px;
+  display: inline-block;
+}
+
+.MenuTitle {
+  vertical-align:top;
+  display: inline-block;
+  flex-direction: column;
+  text-align: center;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  overflow: hidden; /* if you don't want #second to wrap below #first */
+}
+
+
+/* Signin container */
+
+.UnauthSigninAzure {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+}
+
+/* Drag and drop*/
+#div_userDetailsTop {
+  display: inline;
+}
+
+#ul_userDetailsTop li {
+  display: inline-block;
+  padding: 5px;
+  text-align: center;
+  vertical-align: middle;
+}
+#ul_mainMenuItems li {
+  display: inline-block;
+  padding: 5px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* popup styling */
+.popup-content {
+  margin: auto;
+  background: rgb(0, 38, 125);
+  width: 50%;
+  padding: 5px;
+}
+
+.popup-arrow {
+  color: rgb(255, 255, 255);
+}
+
+[role='tooltip'].popup-content {
+  width: 200px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
+}
+
+.popup-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+[data-popup='tooltip'].popup-overlay {
+  background: transparent;
+}
+
+/* Disabling GenericFileViewer download button - user should download via file viewer only */
+#pdf-download {
+   display: none; 
+}
+
+
+.react-player {
+  position: relative; 
+}
