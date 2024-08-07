@@ -1,11 +1,11 @@
 
 
-import Main from '~components/organisms/main';
+import DemoPage from '~src\pages\demoPage';
 
 const Home = () => {
   return (
     <div className="wrapper">
-      <Main></Main>
+      <DemoPage></DemoPage>
     </div>
   );
 };
