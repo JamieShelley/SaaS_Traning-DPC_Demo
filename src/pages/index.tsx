@@ -1,6 +1,4 @@
-
-
-import DemoPage from '~src\pages\demoPage';
+import DemoPage from './demoPage';
 
 const Home = () => {
   return (
