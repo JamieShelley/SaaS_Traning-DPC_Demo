@@ -1,9 +1,8 @@
 import { format } from 'date-fns';
 
-import { DataSync } from '~components/DataSync';
+import { MockDataSync } from '~components/MockDataSync';
 
-import { IGlobalContext } from '~contexts/Global/GlobalContext';
-import { useUser } from '~contexts/User/UserProvider';
+
 
 import { IClient } from '~entities/CIlient';
 import { ICase } from '~entities/Case';
@@ -13,8 +12,7 @@ import { INewFolder } from '~entities/NewFolder.interface';
 import { IRenameFolder } from '~entities/RenameFolder.interface';
 
 
-import { deleteFile, doDownloadTests, downloadFileAndSaveLocal, IConnectionMetaObjects, uploadFile, downloadFileAndRuturnData } from '~utils/AzureFileStorageio';
-const ds: DataSync = new DataSync('');
+const ds: MockDataSync = new MockDataSync('');
 
 export function GenHash(seed: string) {
   return ds.GenHash(seed);
@@ -113,7 +111,7 @@ export function GetData(
   doGetDataCommand: any,
   onGetDataCompleteCallback: Function,
   cloudProvider: string,
-  globalContext: IGlobalContext,
+  globalContext: any,
   sessionId: string,
   sessionToken: string,
 ) {
@@ -265,24 +263,8 @@ export function DeleteData(username: string, userLevel: string, dodeleteDataComm
 
 export function DoTestFunction(doTestFunctionClickCammnd: any, allAccountDetails) {
   if (doTestFunctionClickCammnd === 'DoAzureStorageTests') {
-    doDownloadTests(allAccountDetails);
+    //doDownloadTests(allAccountDetails);
   }
-}
-
-export async function doUploadFileToAzure(file: File, fileUID: string, azureFileConnectionMetaObjects: IConnectionMetaObjects) {
-  return await uploadFile(azureFileConnectionMetaObjects, file, fileUID);
-}
-
-export async function doDownloadFileFromAzureAndSaveToLocal(fileUID: string, saveFilename: string, azureFileConnectionMetaObjects: IConnectionMetaObjects): Promise<boolean> {
-  return await downloadFileAndSaveLocal(azureFileConnectionMetaObjects, fileUID, saveFilename);
-}
-
-export async function doDownloadFileFromAzureAndReturnBlobData(fileUID: string, azureFileConnectionMetaObjects: IConnectionMetaObjects) {
-  return await downloadFileAndRuturnData(azureFileConnectionMetaObjects, fileUID);
-}
-
-export async function doDeleteFileFromAzure(fileUID: string, azureFileConnectionMetaObjects: IConnectionMetaObjects) {
-  return await deleteFile(azureFileConnectionMetaObjects, fileUID);
 }
 
 export function DoGoto(gotoCommand: any) {
@@ -329,7 +311,8 @@ export function BroadcastSelectedAs(
           const channel = new BroadcastChannel(broadcastCmd.channelName);
           channel.postMessage(payload);
         } else {
-          globalContext.doNotifyMessage(`BroadcastSelectedAs -> ${broadcastCmd.payloadKey} not found in ${JSON.stringify(value)}`);
+          //globalContext.doNotifyMessage(`BroadcastSelectedAs -> ${broadcastCmd.payloadKey} not found in ${JSON.stringify(value)}`);
+          console.log(`BroadcastSelectedAs -> ${broadcastCmd.payloadKey} not found in ${JSON.stringify(value)}`);
         }
 
       } else //Else send whole payload 
@@ -340,68 +323,34 @@ export function BroadcastSelectedAs(
       }
     }
   } catch (e) {
-    globalContext.doNotifyMessage(`BroadcastSelectedAs -> ${broadcastCmd.payloadKey} not found in ${JSON.stringify(value)}`);
+    //globalContext.doNotifyMessage(`BroadcastSelectedAs -> ${broadcastCmd.payloadKey} not found in ${JSON.stringify(value)}`);
+    console.log(`BroadcastSelectedAs -> ${broadcastCmd.payloadKey} not found in ${JSON.stringify(value)}`);
   }
 }
 
 export function SetToGlobalDataCache(
   config: { rootKey: string; subKey: string },
   data,
-  globalContext: IGlobalContext
+  globalContext: any
 ) {
   try {
-    if (
-      globalContext.globalDataCache !== undefined &&
-      globalContext.globalDataCache.has(config.rootKey)
-    ) {
-      const existingObject = JSON.parse(globalContext.globalDataCache.get(config.rootKey));
-      existingObject[config.subKey] = data[config.subKey];
-      const str = JSON.stringify(existingObject);
-      globalContext.updateGlobalDataCache(config.rootKey, str); //Override
-      localStorage.setItem(config.rootKey, str);
-    } else {
-      const newObject = {};
-      newObject[config.subKey] = data[config.subKey];
-      const str = JSON.stringify(newObject);
-      globalContext.updateGlobalDataCache(config.rootKey, str);
-      localStorage.setItem(config.rootKey, str);
-    }
+    // globalContext.doNotifyMessage('Mock SetToGlobalDataCache executed');
+    console.log('Mock SetToGlobalDataCache executed');
   } catch (e) {
-    globalContext.doNotifyMessage('SetToGlobalDataCache -> unhandled exception!');
+    // globalContext.doNotifyMessage('SetToGlobalDataCache -> unhandled exception!');
+    console.log('SetToGlobalDataCache -> unhandled exception!');
   }
 }
 
-export function GetFromGlobalDataCache(config: { rootKey: string; subKey: string }, globalContext: IGlobalContext, onGotData: Function) {
+export function GetFromGlobalDataCache(config: { rootKey: string; subKey: string }, globalContext: any, onGotData: Function) {
   try {
-    let retreivedData = undefined;
+    const retreivedData = undefined;
     //
-    if (globalContext.globalDataCache !== undefined &&
-      globalContext.globalDataCache.has(config.rootKey)
-    ) {
-      retreivedData = globalContext.globalDataCache.get(config.rootKey);
-    }
-    //Get from local storage if still undefined, and if still undefined, create some new data
-    if (retreivedData === undefined) {
-      const localData = localStorage.getItem(config.rootKey);
-      if (localData === undefined) {
-        globalContext.doNotifyMessage('GetFromGlobalDataCache -> data not found'); //Alert to data not found in localstorage or cache
-      } else {
-        retreivedData = JSON.parse(localData); //If found, convert to object
-      }
-    }
-    //
-    if (retreivedData !== undefined && retreivedData !== null) {
-      onGotData(retreivedData, config);
-    } else {
-      const newObject: any = {};
-      newObject[config.subKey] = '';
-      const str = JSON.stringify(newObject);
-      localStorage.setItem(config.rootKey, str);
-      globalContext.updateGlobalDataCache(config.rootKey, str);
-      onGotData(newObject, config);
-    }
+    //globalContext.doNotifyMessage('Mock GetFromGlobalDataCache executed');
+    console.log('Mock GetFromGlobalDataCache executed');
   } catch (e) {
-    globalContext.doNotifyMessage('GetFromGlobalDataCache -> unhandled exception!');
+    //globalContext.doNotifyMessage('GetFromGlobalDataCache -> unhandled exception!');
+    console.log('GetFromGlobalDataCache -> unhandled exception!');
   }
 }
 
@@ -486,7 +435,14 @@ export async function DoNewEntryAddToTable(
       data: newDataEntry,
       associatedMatterName: 'N/A'
     };
-    const result = await SetData(username, userLevel, doSetDataCommand, cloudProvider);
+    //Mock
+    const result = {
+      result : true,
+      rowKey : 'test'
+    };// await SetData(username, userLevel, doSetDataCommand, cloudProvider);
+    //globalContext.doNotifyMessage('Mock DoNewEntryAddToTable executed');
+    console.log('Mock DoNewEntryAddToTable executed');
+
     if (result.result === true) {
       if (onSuccess !== null || onSuccess !== undefined) {
         await onSuccess(result.rowKey);
@@ -496,7 +452,11 @@ export async function DoNewEntryAddToTable(
     }
   } else {
     await onFailure();
-    globalContext.doNotifyMessage(
+    // globalContext.doNotifyMessage(
+    //   `${config['entityToCreate']}
+    //     not supported, please update 'DoNewEntryAddToTable' function or the source config.json`
+    // );
+    console.log(
       `${config['entityToCreate']}
         not supported, please update 'DoNewEntryAddToTable' function or the source config.json`
     );
@@ -532,7 +492,8 @@ export async function OnChangeEntryUpdateTable(
         data: entity,
         associatedMatterName: 'N/A'
       };
-      await SetData(username, userLevel, doSetDataCommand, cloudProvider);
+      console.log('Mock OnChangeEntryUpdateTable executed');
+      //await SetData(username, userLevel, doSetDataCommand, cloudProvider);
       return onComplete(true);
     }
   } catch {

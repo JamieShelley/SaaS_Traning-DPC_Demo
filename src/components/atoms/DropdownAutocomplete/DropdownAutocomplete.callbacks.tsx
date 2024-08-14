@@ -1,8 +1,5 @@
 import { CallbackFunctionNames } from '~constants/functionNames.callbacks';
 
-import { IGlobalContext } from '~contexts/Global/GlobalContext';
-import { IUserContext } from '~contexts/User/UserContext';
-import { useUser } from '~contexts/User/UserProvider';
 
 import {
   BroadcastSelectedAs,
@@ -20,8 +17,8 @@ import {
 
 export const DropdownAutocompleteCallbacks = (
   dataProcessingConfig: any,
-  user: IUserContext,
-  global: IGlobalContext,
+  user: any,
+  global: 'any',
   sessionId: string,
   sessionToken : string
 ): Map<string, Function> => {
@@ -42,7 +39,7 @@ export const DropdownAutocompleteCallbacks = (
 
   const dpc: string[] = Object.keys(dataProcessingConfig);
   
-  const { cloudProvider } = useUser();
+  const cloudProvider = 'AWS'; //Hardcoded
 
 
   if (dpc.includes(ON_NEW_OR_UPDATE_ENTRY_ENABLED)) {
@@ -67,8 +64,8 @@ export const DropdownAutocompleteCallbacks = (
     if (subKeys.includes(ADD_NEW_ENTRY_TO_TABLE)) {
       functionMap.set(ADD_NEW_ENTRY_TO_TABLE, (value: any, onFailure: Function, onSuccess: Function) =>
         DoNewEntryAddToTable(
-          user.allAccountDetails.username,
-          user.userLevel,
+          'MOCKUSERNAME',
+          'MOCKUSERLEVEL',
           value,
           dataProcessingConfig[ON_CHANGE][ADD_NEW_ENTRY_TO_TABLE],
           cloudProvider,
@@ -83,8 +80,8 @@ export const DropdownAutocompleteCallbacks = (
         UPDATE_TABLE_ENTRY,
         (recordRowKey: any, newValue: any, entity: any, onComplete: Function) =>
           OnChangeEntryUpdateTable(
-            user.allAccountDetails.username,
-            user.userLevel,
+            'MOCKUSERNAME',
+            'MOCKUSERLEVEL',
             recordRowKey,
             newValue,
             entity,
@@ -99,8 +96,8 @@ export const DropdownAutocompleteCallbacks = (
   if (dpc.includes(GET_DATA)) {
     functionMap.set(GET_DATA, (onGetDataCompleteCallback: Function) =>
       GetData(
-        user.allAccountDetails.username,
-        user.userLevel,
+        'MOCKUSERNAME',
+        'MOCKUSERLEVEL',
         dataProcessingConfig[GET_DATA],
         onGetDataCompleteCallback,
         cloudProvider,

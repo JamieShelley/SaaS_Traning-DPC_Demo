@@ -1,0 +1,20 @@
+export const CallbackFunctionNames = {
+  ON_CHANGE: 'onChange',
+  ON_ADD_FILES_TOUPLOAD: 'onAddFilesToUpload',
+  ON_CLICK: 'onClick',
+  GET_DATA: 'getData',
+  GO_TO: 'goTo',
+  TEST_FUNCTION: 'testFunction',
+  CALL_FUNCTION: 'callFunction',
+  ON_LOAD_PLACEHOLDER: 'onLoadPlaceholderSet',
+  ON_LOAD: 'onLoad',
+  BROADCAST_SELECTED: 'broadcastSelectedAs',
+  SET_TO_DATA_CACHE: 'setToGlobalDataCache',
+  GET_FROM_DATA_CACHE: 'getFromGlobalDataCache',
+  ADD_NEW_ENTRY_TO_TABLE: 'onNewEntryAddToTable',
+  UPDATE_TABLE_ENTRY: 'onChangeEntryUpdateTable',
+  UPLOAD_FILE: 'doUploadFileToAzure',
+  DOWNLOAD_FILE: 'doDownloadFileFromAzure',
+  ON_DELETE_ENTRY_FFROM_TABLE: 'onDeleteEntryFromTable',
+  ON_NEW_OR_UPDATE_ENTRY_ENABLED: 'onNewOrUpdateEntryEnabled'
+};

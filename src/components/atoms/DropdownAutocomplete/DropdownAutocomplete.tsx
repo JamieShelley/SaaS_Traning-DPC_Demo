@@ -1,12 +1,8 @@
 import { Autocomplete, DialogTitle, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-import { JsonComponentProcessor } from '~components/organisms/JsonComponentProcessor/JsonComponentProcessor';
 
 import { CallbackFunctionNames } from '~constants/functionNames.callbacks';
-
-import { useGlobalState } from '~contexts/Global/GlobalProvider';
-import { useUser } from '~contexts/User/UserProvider';
 
 import { switchGotDataToType } from '~utils/WidgetDataFunctions';
 
@@ -50,12 +46,9 @@ export const DropdownAutocomplete = ({
   }
 
 
-  const user = useUser();
-  const global = useGlobalState();
-  const { sessionId, sessionToken } = useUser();
 
-  const { doNotifyMessage } = global;
-  const functionCallbacks = DropdownAutocompleteCallbacks(dataProcessingConfig, user, global, sessionId, sessionToken );
+
+  const functionCallbacks = DropdownAutocompleteCallbacks(dataProcessingConfig, 'null', global, 'null', 'null' );
   const [options, setOptions] = useState<any[]>([]);
   const [displayKey, setDisplayKey] = useState<string>();
   const [currentEntity, setCurrentEntity] = useState<any | null>(null);
@@ -174,9 +167,9 @@ export const DropdownAutocomplete = ({
 
   const onEntryUpdateComplete = (success) => {
     if (success === true) {
-      doNotifyMessage('Create new entry success!');
+      console.log('Create new entry success!');
     } else {
-      doNotifyMessage('Create new entry failed!');
+      console.log('Create new entry failed!');
     }
     fetchOptions();
     setExistingEntry(currentEntity);
@@ -276,7 +269,7 @@ export const DropdownAutocomplete = ({
 
   const labelContent = currentEntity === undefined || currentEntity === null ? 'N/A' : (currentEntity[displayKey]);
   if (!(typeof labelContent === 'string')) {
-    doNotifyMessage('currentEntity not assigned, possbile error detected');
+    console.log('currentEntity not assigned, possbile error detected');
     //throw Error('ERROR: labelContent is of type:' + (typeof labelContent) + ' should be string type');
   }
   return (
@@ -309,7 +302,8 @@ export const DropdownAutocomplete = ({
           />
         </div>
 
-        {dynamicButton && JsonComponentProcessor(dynamicButton)}
+        {/* {dynamicButton && JsonComponentProcessor(dynamicButton)} */}
+        {dynamicButton}
       </div>
 
       <ConfirmDialog

@@ -10,13 +10,11 @@ export function mapFnConfig(dpc: any) {
 
 function Dropdown_Mattername() {
 
-  let featureAllowed = false;
-
-    const dpc = mapFnConfig(
-      [
-        {
-          'functionName': 'onChange',
-          'config':
+  const dpc = mapFnConfig(
+    [
+      {
+        'functionName': 'onChange',
+        'config':
           {
             'broadcastSelectedAs': {
               'channelName': 'CurrentMatterData',
@@ -40,50 +38,48 @@ function Dropdown_Mattername() {
             }
             
           }
+      },
+      {
+        'functionName': 'getData',
+        'config': {
+          'tableName': 'Matters',
+          'rowKey': '',
+          'displayKey': 'matterName',
         },
-        {
-          'functionName': 'getData',
-          'config': {
-            'tableName': 'Matters',
-            'rowKey': '',
-            'displayKey': 'matterName',
-          },
-        },
-        {
-          'functionName': 'onLoadPlaceholderSet',
-          'config': {
-            'loadFromLocalData': 'SelectedMatter'
-          }
-        },
-        {
-          'functionName': 'onLoad',
-          'config':
+      },
+      {
+        'functionName': 'onLoadPlaceholderSet',
+        'config': {
+          'loadFromLocalData': 'SelectedMatter'
+        }
+      },
+      {
+        'functionName': 'onLoad',
+        'config':
           {
             'getFromGlobalDataCache': {
               'rootKey': 'FocusedMatter',
               'subKey': 'Name'
             }
           }
-        }
-      ]
-    );
-
-    return <DropdownAutocomplete
-      itemName='Matter_Name'
-      label='Matter Name'
-      dataProcessingConfig={dpc}
-      dynamicButton={{}
       }
-      styles={{
-        'color': 'black',
-        'backgroundColor': 'grey',
-        'fontSize': 'p',
-        'width': '600px'
-      }}
-      focusedEntityTypeStr='Matter'
-    />;
-  }
+    ]
+  );
+
+  return <DropdownAutocomplete
+    itemName='Matter_Name'
+    label='Matter Name'
+    dataProcessingConfig={dpc}
+    styles={{
+      'color': 'black',
+      'backgroundColor': 'grey',
+      'fontSize': 'p',
+      'width': '600px'
+    }}
+    focusedEntityTypeStr='Matter'
+  />;
 }
+
 
 export default function DemoPage() {
   return (
